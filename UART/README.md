@@ -1,7 +1,7 @@
 # UART
 UART (Universal asynchronous receiver-transmitter) is a data communication protocol for asynchronous serial communication. UART performs parallel-to-serial conversion on data received from a microprocessor, sends the data bits one by one, then performs serial-to-parallel conversion. The timing issue is handled by a start bit and stop bit(s). There is also an optional parity bit to determine whether the correct data is received [[1]](https://www.ti.com/lit/ug/sprugp1/sprugp1.pdf).
 
-UART baud rates are relatively slower than the microprocessors speed. Typical baud rates are 9600, 31250 and 115200 Hz. In order to sample the data bits properly, Rx driver uses faster bit rates, generally 8x or 16x times of the baud rate. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers [[2]](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). 
+UART baud rates are relatively slower than the microprocessors speed. Typical baud rates are 9600, 31250 and 115200 Hz. In order to sample the data bits properly, Rx driver uses oversampling, generally 8x or 16x times of the baud rate. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers [[2]](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). 
 
 ### UART Frame
 The UART frame is consists of:
@@ -16,7 +16,7 @@ In IDLE mode, data transmission line is held at logic-high(1) level in which the
 
 
 ### Baud Rate
-
+UART Baud Rate is calculated by
 
 
 
