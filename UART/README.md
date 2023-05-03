@@ -1,7 +1,7 @@
 # UART
 UART (Universal asynchronous receiver-transmitter) is a data communication protocol for asynchronous serial communication. UART performs parallel-to-serial conversion on data received from a microprocessor, sends the data bits one by one, then performs serial-to-parallel conversion. The timing issue is handled by a start bit and stop bit(s). There is also an optional parity bit to determine whether the correct data is received [[1]](https://www.ti.com/lit/ug/sprugp1/sprugp1.pdf).
 
-UART baud rates are relatively slower than the microprocessors speed. Typical baud rates are 9600, 31250 and 115200 Hz. In order to sample the data bits properly, Rx driver uses oversampling, generally 8x or 16x times of the baud rate. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers [[2]](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). 
+UART baud rates are relatively slower than the microprocessors speed. Typical baud rates are 9600 and 115200 Hz. In order to sample the data bits properly, Rx driver uses oversampling, generally 8x or 16x times of the baud rate. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers [[2]](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). 
 
 ### UART Frame
 The UART frame is consists of:
@@ -20,13 +20,21 @@ UART Baud Rate is calculated by \
 $f_{baud} = \frac{f_{clk}}{1 + baudDiv}$ \
 where $f_{clk}$ is the system frequency, $f_{baud}$ is the baud rate and $baudDiv$ is the dividor to achieve desired baud rate.
 
+To obtain the desired baud rate and its **8x** or **16x** counterpart a **frequency dividor** can be used. First, oversampled baud frequency should be calculated and then real baud frequency can be obtain from it to make them synchronized.  
+A programmable baud rate can be easily design with a $baudDiv$ value.
 
 
 ### Tx Driver
+UART Tx Driver can be easily designed with a Finite State Machine (FSM) including four states:
+* IDLE  : there is no transfer and tx line is high,
+* START : transmission is started and tx line is low,
+* DATA  : data bits and an optional parity bit are transmitted by starting from least significant bits to most significant ones,
+* STOP  : transmission is completed and tx line is high
+
 
 
 ### Rx Driver
-UART baud rates are relatively slower than the microprocessors speed. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers. 
+When transmission line drops logic-low(0) from logic-high(1), the UART Tx driver understands that there is a. UART baud rates are relatively slower than the microprocessors speed. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers. 
 
 
 ## Block Diagram
