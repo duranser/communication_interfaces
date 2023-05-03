@@ -16,7 +16,9 @@ In IDLE mode, data transmission line is held at logic-high(1) level in which the
 
 
 ### Baud Rate
-UART Baud Rate is calculated by
+UART Baud Rate is calculated by \
+$f_{baud} = \frac{f_{clk}}{1 + baudDiv}$ \
+where $f_{clk}$ is the system frequency, $f_{baud}$ is the baud rate and $baudDiv$ is the dividor to achieve desired baud rate.
 
 
 
