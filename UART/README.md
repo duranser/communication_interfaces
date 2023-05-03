@@ -28,14 +28,15 @@ A programmable baud rate can be achieved by a $baudDiv$ control register.
 In IDLE mode, data transmission line is held at logic-high(1) level in which there is no data transfer. Data transmission is started when the transmission line switched from logic-high(1) to the logic-low(0). After that, data bits and an optional parity bit are transmitted by starting from least significant bits to most significant ones. When the data transmission is completed, the transmission line drives logic-high(1).
 
 UART Tx Driver can be easily designed with a Finite State Machine (FSM) including four states:
-* IDLE  : there is no transfer and tx line drives high,
-* START : transmission is started and tx line is switched to low,
-* DATA  : data bits and an optional parity bit are transmitted by starting from LSBs to MSBs,
-* STOP  : transmission is completed and tx line drives high
+* **IDLE**  : there is no transfer and tx line drives high,
+* **START** : transmission is started and tx line is switched to low,
+* **DATA**  : data bits and an optional parity bit are transmitted by starting from LSBs to MSBs,
+* **STOP**  : transmission is completed and tx line drives high
 
 <img src="https://user-images.githubusercontent.com/51496220/235855392-baff2e4c-54a5-4ead-aa35-21893fed8ad6.png" width="300">
 
-UART Tx Driver can have start, busy and done control signals to inform the FIFO buffers about the status and whether new data read is necessary or not.
+**tx_en** is the control signal starting data transmission and **bit_index** represents the number of the data bit transmitted. 
+UART Tx Driver can also have start, busy and done output control signals to inform the FIFO buffers about the status and whether new data read is necessary or not.
 
 ### Rx Driver
 When transmission line drops logic-low(0) from logic-high(1), the UART Tx driver understands that there is a. UART baud rates are relatively slower than the microprocessors speed. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers. 
