@@ -5,8 +5,12 @@ UART (Universal asynchronous receiver-transmitter) is a data communication proto
 The UART frame is consists of:
 * 1 Start Bit (logic low)
 * 5-8 Data Bits
+* 0-1 Parity Bit
 * 1-2 Stop Bit(s) (logic high)
 
+<img src="https://user-images.githubusercontent.com/51496220/235833559-c95beef7-b57e-4a39-a183-48b0f1c9f09b.png" width="300">
+
+In IDLE mode, data transmission line is held at logic-high(1) level in which there is no data transfer. Data transmission is started when the transmission line switched from logic-high(1) to the logic-low(0). Data bits are framed with a start bit, an optional parity bit and 1 to 2 stop bit(s). The number of data bits can be configured to 5-8 bits.
 
 
 ## Block Diagram
