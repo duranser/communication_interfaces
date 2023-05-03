@@ -21,7 +21,7 @@ $f_{baud} = \frac{f_{clk}}{1 + baudDiv}$ \
 where $f_{clk}$ is the system frequency, $f_{baud}$ is the baud rate and $baudDiv$ is the dividor to achieve desired baud rate.
 
 To obtain the desired baud rate and its **8x** or **16x** counterpart a **frequency dividor** can be used. First, oversampled baud frequency should be calculated and then real baud frequency can be obtain from it to make them synchronized.  
-A programmable baud rate can be easily design with a $baudDiv$ value.
+A programmable baud rate can be achieved by a $baudDiv$ control register.
 
 
 ### Tx Driver
