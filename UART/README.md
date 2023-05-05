@@ -21,8 +21,6 @@ $f_{baud} = \frac{f_{clk}}{1 + baudDiv}$ \
 where $f_{clk}$ is the system frequency, $f_{baud}$ is the baud rate and $baudDiv$ is the dividor to achieve desired baud rate.
 
 To obtain the desired baud rate and its **8x** or **16x** counterpart a **frequency dividor** can be used. First, oversampled baud frequency should be calculated and then real baud frequency can be obtain from it to make them synchronized.  
-A programmable baud rate can be achieved by a $baudDiv$ control register.
-
 
 ### Tx Driver
 In IDLE mode, data transmission line is held at logic-high(1) level in which there is no data transfer. Data transmission is started when the transmission line switched from logic-high(1) to the logic-low(0). After that, data bits and an optional parity bit are transmitted by starting from least significant bits to most significant ones. When the data transmission is completed, the transmission line drives logic-high(1).
@@ -39,7 +37,28 @@ UART Tx Driver can be easily designed with a Finite State Machine (FSM) includin
 UART Tx Driver can also have start, busy and done output control signals to inform the FIFO buffers about the status and whether new data read is necessary or not.
 
 ### Rx Driver
-When transmission line drops logic-low(0) from logic-high(1), the UART Tx driver understands that there is a. UART baud rates are relatively slower than the microprocessors speed. To increase the performance, most of the UART interfaces include a Tx (transmit) and a Rx (receive) FIFO buffers. 
+Different from the Tx Driver, Rx Driver uses **16x** times of the baud rate. In IDLE mode, Rx driver observes the data receive line if it switches from logic-high(1) to logic-low(0) level. If the start bit logic-low(0) lasts at least 8 sample (T/2), data bits are started to read. Each data bit is sampled at 16th sample. When the data receive is completed, Rx Driver waits for stop bit(s) logic-high(1). If stop bit(s) lasts at least 8 sample (T/2) or 16 sample (T), Rx Driver writes the received data to the FIFO Buffer.
+
+UART Rx Driver is designed with a Finite State Machine (FSM) including four states:
+* **IDLE**  : 
+* **START** : 
+* **DATA**  : 
+* **STOP**  : 
+
+
+### Control and Status Registers
+* **tx_en** : Enable Tx channel and start to transmit 1-bit,
+* **rx_en** : Enable Rx channel and start to receive 1-bit,
+* **data_bits_len** : Number of data bits is configured with 2-bit,
+* **parity_set** : Parity bit option can be set with 1-bit,
+* **stop_bits_len** : Stop bit(s) length is configured with 2-bit,
+* **baudDiv** : A programmable baud rate can be achieved by 16-bit,
+* **buffer_depth** : Depth of the FIFO Buffers can be configured by 8-bit,
+
+* **tx_full** : tx buffer is full,
+* **tx_empty**: tx buffer is empty,
+* **rx_full** : rx buffer is full,
+* **rx_empty**: rx buffer is empty
 
 
 ## Block Diagram
