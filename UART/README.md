@@ -44,8 +44,8 @@ UART Rx Driver is designed with a Finite State Machine (FSM) including four stat
 * **START** : 
 * **DATA**  : 
 * **STOP**  : 
-* 
-<img src="https://user-images.githubusercontent.com/51496220/236406776-2cf7b11c-54fc-47ef-b9f7-cc188a3bd035.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/51496220/236406776-2cf7b11c-54fc-47ef-b9f7-cc188a3bd035.png" width="500">
 
 
 ### Control and Status Registers
