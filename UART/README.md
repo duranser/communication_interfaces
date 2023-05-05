@@ -40,12 +40,15 @@ UART Tx Driver can also have start, busy and done output control signals to info
 Different from the Tx Driver, Rx Driver uses **16x** times of the baud rate. In IDLE mode, Rx driver observes the data receive line if it switches from logic-high(1) to logic-low(0) level. If the start bit logic-low(0) lasts at least 8 sample (T/2), data bits are started to read. Each data bit is sampled at 16th sample. When the data receive is completed, Rx Driver waits for stop bit(s) logic-high(1). If stop bit(s) lasts at least 8 sample (T/2) or 16 sample (T), Rx Driver writes the received data to the FIFO Buffer.
 
 UART Rx Driver is designed with a Finite State Machine (FSM) including four states:
-* **IDLE**  : 
-* **START** : 
-* **DATA**  : 
-* **STOP**  : 
+* **IDLE**  : rx line is observed to detect start bit low,
+* **START** : Samples of the start bit is counted,
+* **DATA**  : Each data bit is sampled,
+* **STOP**  : Samples of the stop bit(s) is counted
 
 <img src="https://user-images.githubusercontent.com/51496220/236406776-2cf7b11c-54fc-47ef-b9f7-cc188a3bd035.png" width="500">
+
+
+### FIFO Buffers
 
 
 ### Control and Status Registers
@@ -71,5 +74,5 @@ UART Rx Driver is designed with a Finite State Machine (FSM) including four stat
 
 
 ## References
-[1] https://www.ti.com/lit/ug/sprugp1/sprugp1.pdf
+[1] https://www.ti.com/lit/ug/sprugp1/sprugp1.pdf   \
 [2] https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter
